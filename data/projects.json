@@ -1,0 +1,18 @@
+{
+    "projects":[
+        {
+            "title": "Newsmania",
+            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1719375462/Newsmania/qafdk3cspsury8xq0rls.png",
+            "project_url": "https://github.com/manirajyadav-1/Newsmania",
+            "description": "News WebApp with latest headlines from top newspapers in India and the USA.",
+            "tags": [ "react", "nodejs", "mongodb"  ]
+        },
+        {
+            "title": "Ecommerce",
+            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1720721737/xdod1wt6sqi9lwxa8xlk.png",
+            "project_url": "https://github.com/manirajyadav-1/Ecommerce",
+            "description": "E-commerce website project aims to create a comprehensive online shopping platform for clothing.",
+            "tags": [ "react", "nodejs", "mongodb"  ]
+        }
+    ]
+}
