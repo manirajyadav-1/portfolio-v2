@@ -51,7 +51,8 @@ function Projects() {
     }, [])
 
     return (
-        <div id="projects" className={`projectCont w-full h-auto relative top-[50px] p-10px flex flex-col items-center justify-center mb-[50px]`}>
+        <>
+            <div id="projects" className={`projectCont w-full h-auto relative top-[50px] p-10px flex flex-col items-center justify-center mb-[50px]`}>
             <div className={`w-full flex flex-row items-center justify-center`}>
                 <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
                 <p data-aos="fade-up" className={`text-white-200 text-[20px]`}>Latest Works</p>
@@ -68,17 +69,17 @@ function Projects() {
                     projects.length > 0 ?
                         projects.slice(0, 6).map((list, i) => {
                             return (
-                                <div data-aos="zoom-in" key={i} className={`box w-full h-auto bg-dark-200 rounded-[5px] relative top-[50px] transition-all mb-[50px] mr-[5px] opacity-[.7] md:w-[250px] hover:opacity-[1]`} key={list}>
+                                <div data-aos="zoom-in" key={i} className={`box w-full h-auto bg-dark-200 rounded-[5px] relative top-[50px] transition-all mb-[50px] mr-[5px] opacity-[.7] md:w-[250px] hover:opacity-[1]`} >
                                     <div className="imgCont"></div>
                                     <style jsx>{`
                                 .imgCont{
                                     width: 100%;
-                                    height: 190px;ˀ
+                                    height: 190px;
                                     background-image: url(${list.imageUrl === "" || list.imageUrl === null ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fcoding%2F&psig=AOvVaw0CQ1oOdY9kRJdlFgB0luDX&ust=1720807568236000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCRpfHJn4cDFQAAAAAdAAAAABAO" : list.imageUrl});
                                     background-size: cover;
                                     background-repeat: no-repeat;
                                     background-position: center;
-                                    // box-shadow: 0px 0px 3px #000;
+                                    box-shadow: 0px 0px 3px #000;
                                     border-radius: 5px;
                                 }
                             `}</style>
@@ -123,10 +124,20 @@ function Projects() {
                         ""
                 }
             </div>
-            <div className="w-full h-auto mt-4 mb-5 p-3 flex flex-row flex-wrap items-center justify-between ">
-                {loading ? "Loading..." : error !== null ? <p>{error}</p> : <GithubRepo repos={repo} />}
-            </div>
         </div>
+        <div className={`w-full flex flex-col items-center justify-center`}>
+            <div className={`w-full flex flex-row items-center justify-center`}>
+                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
+                <p data-aos="fade-up" className={`text-white-200 text-[20px]`}>Github Repos</p>
+                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
+            </div>
+            <a data-aos="zoom-in-up" className={`text-center text-green-200 underline text-[14px]`}>Latest Contribution</a>
+        </div>
+         <div className="w-full h-auto mt-4 mb-5 p-3 flex flex-row flex-wrap items-center justify-between ">
+           
+             {loading ? "Loading..." : error !== null ? <p>{error}</p> : <GithubRepo repos={repo} />}
+         </div>
+        </>
     )
 }
 
@@ -138,7 +149,7 @@ function GithubRepo({ repos }) {
         <>
             {
                 repos.length > 0 ?
-                    repos.slice(3, 6).map((rep, i) => {
+                    repos.slice(3, 9).map((rep, i) => {
                         return (
                             <div data-aos="zoom-in" key={i} className="relative w-full h-[180px] bg-dark-200 flex flex-col items-start justify-start px-4 py-3 mt-2 rounded-md md:w-[300px] ">
                                 <h2 className="w-full text-[20px] ">{rep.name}</h2>

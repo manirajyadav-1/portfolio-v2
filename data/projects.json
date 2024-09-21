@@ -1,7 +1,7 @@
 {
     "projects":[
         {
-            "title": "Roomie",
+            "title": "Amigo",
             "imageUrl": "",
             "project_url": "https://github.com/manirajyadav-1/Roomie",
             "description": "Roommate finder app that enables authorized users to post listings and send requests for new roommates.",
