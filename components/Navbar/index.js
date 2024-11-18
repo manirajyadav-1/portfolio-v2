@@ -6,8 +6,6 @@ import { socials } from "../../data/socials.json"
 import avatar from "../../public/images/avatar/avatar.png"
 
 function NavBar() {
-
-
     return (
         <React.Fragment>
             <div className={`navbar relative h-auto w-full flex align-center justify-between py-[20px]`}>
