@@ -59,7 +59,6 @@ export default function Header({ children }) {
         <header className={`header w-full h-[100vh] relative bg-dark-200 md:h-auto`}>
             <Container>
                 {children}
-
                 {/* shows on desktop */}
                 <div className={`w-full h-[70vmin] flex align-center items-center justify-center flex-row p-[20px] flex-wrap mt-[50px]`}>
                     <div className={`w-full h-full mb-[50px] relative md:w-[50%]`}>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
-import { FiMail } from "react-icons/fi"
 import { socials } from "../../data/socials.json"
 import avatar from "../../public/images/avatar/avatar.png"
-
+import  { Leetcode } from "../../public/images/content"
 function NavBar() {
     return (
         <React.Fragment>
@@ -29,22 +28,21 @@ function NavBar() {
                 </div>
                 <div className={`relative right w-[50vmin] hidden md:flex `}>
                     <ul className={`flex flex-row align-center justify-between items-center`}>
-                        {socials["linkedin"] !== "" &&
-                            <a href={socials["linkedin"]} target="_blank" className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white `}>
-                                <FaLinkedin className={`mr-[10px] `} />
-                                <small>LinkedIn</small>
-                            </a>}
-
                         {socials["github"] !== "" &&
                             <a href={socials["github"]} target="_blank" className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white `}>
-                                <FaGithub className={`mr-[10px] `} />
+                                <FaGithub className={`mr-[5px]`} />
                                 <small>Github</small>
                             </a>}
+                        {socials["leetcode"] !== "" &&
+                            <a href={socials["leetcode"]} target="_blank" className={"w-[85px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white "}>
+                                <Leetcode className={`mr-[10px]`} />
+                                <small>LeetCode</small>
+                            </a>}
 
-                        {socials["email"] !== "" &&
-                            <a href={`mailto:${socials["email"]}`} className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white `}>
-                                <FiMail className={`mr-[10px] icon mail`} />
-                                <small>Email</small>
+                        {socials["linkedin"] !== "" &&
+                            <a href={socials["linkedin"]} target="_blank" className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white ml-2`}>
+                                <FaLinkedin className={`mr-[5px] icon mail`} />
+                                <small>LinkedIn</small>
                             </a>}
                     </ul>
                 </div>
