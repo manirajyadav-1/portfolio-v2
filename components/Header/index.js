@@ -106,7 +106,7 @@ export default function Header({ children }) {
                         {resumeActive && <ResumeViewer openResume={openResume} />}
                     </div>
                     <div data-aos="fade-left" className={`main w-full h-auto hidden md:block md:w-[50%] relative`}>
-                        <div className={`img-cont w-[250px] h-[250px] p-[15vmin] flex flex-col items-center justify-center bg-cover bg-center  rounded-[50%] `}>
+                        <div className={`img-cont w-[250px] h-[250px] p-[20vmin] flex flex-col items-center justify-center bg-cover bg-center  rounded-[50%]`}>
                             <style jsx>{`
                                 .img-cont{
                                     background-image: url("${avatar}");
@@ -114,13 +114,13 @@ export default function Header({ children }) {
                             `}</style>
                         </div>
                         <div data-aos="fade-up" className={`circleA`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" : languages.languages[0]} className={`langImgA`} />
+                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[0]} className={`langImgA`} />
                         </div>
                         <div data-aos="fade-right" className={`circleB`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" : languages.languages[1]} className={`langImgB`} />
+                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[1]} className={`langImgB`} />
                         </div>
                         <div data-aos="fade-left" className={`circleC`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" : languages.languages[2]} className={`langImgC`} />
+                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[2]} className={`langImgC`} />
                         </div>
                     </div>
                 </div>
