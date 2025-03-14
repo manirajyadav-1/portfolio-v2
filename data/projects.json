@@ -1,17 +1,24 @@
 {
     "projects":[
         {
+            "title": "FarmAi",
+            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1741933237/FarmAi/cslk3jx89tvgf6pudljk.png",
+            "project_url": "https://github.com/manirajyadav-1/Amigo",
+            "description": "A reliable plant disease detection system to help farmers identify issues, manage pesticides, and improve crop yield sustainably.",
+            "tags": [ "react", "springboot", "python"  ]
+        },
+        {
             "title": "Amigo",
-            "imageUrl": "",
-            "project_url": "https://github.com/manirajyadav-1/Roomie",
-            "description": "Roommate finder app that enables authorized users to post listings and send requests for new roommates.",
-            "tags": [ "react", "firebase", "firestore"  ]
+            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1741932141/Amigo/flcbeetj8pjahbtbxzxx.png",
+            "project_url": "https://github.com/manirajyadav-1/Amigo",
+            "description": "Roommate finder app that allows authorized users to post listings, send requests, and navigate an integrated map for better matches.",
+            "tags": [ "react", "firebase", "zustand"  ]
         },
         {
             "title": "Newsmania",
             "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1719375462/Newsmania/qafdk3cspsury8xq0rls.png",
             "project_url": "https://github.com/manirajyadav-1/Newsmania",
-            "description": "News WebApp with latest headlines from top newspapers in India and the USA.",
+            "description": "News WebApp delivering the latest headlines from top newspapers in India and the USA, covering leading sources for real-time updates.",
             "tags": [ "react", "nodejs", "mongodb"  ]
         },
         {
