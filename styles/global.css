@@ -260,11 +260,11 @@ body{
 
 
 .header .circleB .langImgB{
-    width: 18vmin;
-    padding: 15px;
+    width: 16vmin;
+    padding: 12px;
     position: absolute;
     right: 20px;
-    bottom: -50px;
+    bottom: -30px;
     background: var(--bg2);
     border-radius: 50%;
     box-shadow: 0px 0px 15px var(--bg1);
