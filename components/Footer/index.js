@@ -3,7 +3,7 @@ import { FaTwitter, FaGithub, FaFacebook, FaVoicemail, FaLinkedin } from 'react-
 import { AiFillMail } from "react-icons/ai"
 
 import { socials } from "../../data/socials.json"
-import usersInfo from "../../data/usersInfo.json"
+
 
 function Footer() {
 

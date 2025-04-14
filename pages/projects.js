@@ -179,7 +179,7 @@ function GithubRepo() {
         <>
             {
                 loading ? "Loading..." : error !== null ? <p>{error}</p> : repos.length > 0 ?
-                    repos.map((rep, i) => {
+                    repos.slice(0,12).map((rep, i) => {
                         return (
                             <div key={i} className="relative w-full h-[180px] bg-dark-200 flex flex-col items-start justify-start px-4 py-3 mt-2 rounded-md md:w-[300px]">
                                 <h2 className="w-full text-[20px] ">{rep.name}</h2>
