@@ -2,10 +2,10 @@
     "projects":[
         {
             "title": "FarmAi",
-            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1741933237/FarmAi/cslk3jx89tvgf6pudljk.png",
-            "project_url": "https://github.com/manirajyadav-1/Amigo",
+            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1744915165/FarmAi/w9s1ecyynstchzgfiayg.png",
+            "project_url": "https://github.com/manirajyadav-1/FarmAI.git",
             "description": "A reliable plant disease detection system to help farmers identify issues, manage pesticides, and improve crop yield sustainably.",
-            "tags": [ "react", "springboot", "python"  ]
+            "tags": [ "react", "springboot", "java"  ]
         },
         {
             "title": "Amigo",
