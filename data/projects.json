@@ -1,11 +1,25 @@
 {
     "projects":[
         {
+            "title": "AI Resume Builder",
+            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/AI_Resume_Builder/refs/heads/main/output/GenerateResume.png",
+            "project_url": "https://github.com/manirajyadav-1/AI_Resume_Builder",
+            "description": "AI Resume Builder generates personalized, professional resumes from a simple prompt, instantly formatting them into 5+ recruiter-friendly templates.",
+            "tags": [ "react", "springboot", "java" ]
+        },
+        {
             "title": "FarmAi",
             "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1744915165/FarmAi/w9s1ecyynstchzgfiayg.png",
             "project_url": "https://github.com/manirajyadav-1/FarmAI.git",
             "description": "A reliable plant disease detection system to help farmers identify issues, manage pesticides, and improve crop yield sustainably.",
             "tags": [ "react", "springboot", "java"  ]
+        },
+        {
+            "title": "SnapSolve",
+            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/SnapSolve/refs/heads/main/output/SnapSolveOutput.png",
+            "project_url": "https://github.com/manirajyadav-1/SnapSolve",
+            "description": "A Spring Boot application that extracts multiple-choice questions from screenshots and provides AI-generated answers using Google's Gemini AI.",
+            "tags": [ "java", "springboot", "react"  ]
         },
         {
             "title": "Amigo",
