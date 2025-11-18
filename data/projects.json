@@ -1,6 +1,13 @@
 {
     "projects":[
         {
+            "title": "Git Analyzer",
+            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/git_analyzer/refs/heads/main/output/HomePage.png",
+            "project_url": "https://github.com/manirajyadav-1/git_analyzer",
+            "description": "A powerful Git repository analysis tool that leverages AI to provide insights into code evolution, commit patterns, and development trends.",
+            "tags": [ "java", "react", "springboot", "pgvector" ]
+        },
+        {
             "title": "AI Resume Builder",
             "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/AI_Resume_Builder/refs/heads/main/output/GenerateResume.png",
             "project_url": "https://github.com/manirajyadav-1/AI_Resume_Builder",
