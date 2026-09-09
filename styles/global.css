@@ -221,85 +221,60 @@ body{
     width: 45vmax;
 }
 
-.header .main .circleA{
-    width: 250px;
-    height:250px;
-    /* border: 2px solid var(--grnbg2); */
-    padding: 20px;
-    position: absolute;
-    top: 10px;
-    border-radius: 50%;
+/* One scale drives everything: the avatar circle sizes off vmin, and the logos
+   are a PERCENTAGE of that circle -- so they keep the same relative position
+   and size on any screen instead of scaling independently of it. */
+.header .avatarCol{
+    align-self: center;
+    /* the text column carries mb-[50px], which stretches the flex line and
+       pushes a centred avatar 25px low -- match it so both columns centre alike */
+    margin-bottom: 50px;
 }
 
-.header .circleA .langImgA{
-    width: 14vmin;
-    padding: 12px;
-    position: absolute;
-    top: 10px;
-    right: -24px;
-    background: var(--bg2);
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px var(--bg1);
-    z-index: 100;
-    animation: cylceA 10s linear infinite;
-    transition: all .2s ease;
+.header .img-cont{
+    /* --- vertical position of the avatar ---------------------------------
+       The column is centred (align-self: center above), so the circle sits
+       dead centre of the hero row -- equal gap above and below.
+       --avatar-nudge : THE KNOB. Positive moves it DOWN, negative moves it UP.
+                        Keep at 0 for exact centring.
+       -------------------------------------------------------------------- */
+    --avatar-nudge: 0px;
+
+    width: max(250px, 40vmin);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    transform: translateY(var(--avatar-nudge));
 }
 
-
-.header .circleB{
-    width: 250px;
-    height:250px;
-    /* border: 2px solid green; */
-    padding: 20px;
-    position: absolute;
-    top: 70px;
-    /* right: 0px; */
-    margin:0px auto;
-    border-radius: 50%;
-}   
-
-
-.header .circleB .langImgB{
-    width: 16vmin;
-    padding: 12px;
-    position: absolute;
-    right: 20px;
-    bottom: -30px;
-    background: var(--bg2);
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px var(--bg1);
-    z-index: 100;
-    animation: cylceB 10s linear infinite;
-    transition: all .2s ease;
-}
-
-
-
+.header .circleA,
+.header .circleB,
 .header .circleC{
-    width: 250px;
-    height:250px;
-    /* border: 2px solid var(--red1); */
-    padding: 20px;
     position: absolute;
-    /* top: -20px;
-    left: 0px; */
-    margin: 0px auto;
+    inset: 0;
     border-radius: 50%;
+    pointer-events: none;
 }
 
-.header .circleC .langImgC{
-    width: 15vmin;
-    padding: 15px;
+.header .langImgA,
+.header .langImgB,
+.header .langImgC{
+    width: 26%;
+    aspect-ratio: 1 / 1;
+    padding: 2.6%;
     position: absolute;
-    left: -70px;
-    top: 100px;
+    transform: translate(-50%, -50%);
     background: var(--bg2);
     border-radius: 50%;
     box-shadow: 0px 0px 15px var(--bg1);
     z-index: 100;
-    animation: cylceC 10s linear infinite;
+    pointer-events: auto;
     transition: all .2s ease;
 }
+
+/* rim coordinates: cos/sin 45deg = .7071 -> 50% +/- 35.36% */
+.header .circleA .langImgA{ left: 85.36%; top: 14.64%; }  /* top-right */
+.header .circleB .langImgB{ left: 85.36%; top: 85.36%; }  /* bottom-right */
+.header .circleC .langImgC{ left: 0%;     top: 50%;    }  /* left */
 
 .header .langImgA:hover{
     filter: grayscale(0%);

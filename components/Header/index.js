@@ -103,22 +103,22 @@ export default function Header({ children }) {
 
                         {resumeActive && <ResumeViewer openResume={openResume} />}
                     </div>
-                    <div data-aos="fade-left" className={`main w-full h-auto hidden md:block md:w-[50%] relative`}>
-                        <div className={`img-cont w-[250px] h-[250px] p-[20vmin] flex flex-col items-center justify-center bg-cover bg-center  rounded-[50%]`}>
+                    <div data-aos="fade-left" className={`main avatarCol w-full h-auto hidden md:block md:w-[50%] relative`}>
+                        <div className={`img-cont relative bg-cover bg-center rounded-[50%]`}>
                             <style jsx>{`
                                 .img-cont{
                                     background-image: url("${avatar}");
                                 }
                             `}</style>
-                        </div>
-                        <div data-aos="fade-up" className={`circleA`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[0]} className={`langImgA`} />
-                        </div>
-                        <div data-aos="fade-right" className={`circleB`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[1]} className={`langImgB`} />
-                        </div>
-                        <div data-aos="fade-left" className={`circleC`}>
-                            <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[2]} className={`langImgC`} />
+                            <div data-aos="fade-up" className={`circleA`}>
+                                <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[0]} className={`langImgA`} />
+                            </div>
+                            <div data-aos="fade-right" className={`circleB`}>
+                                <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[1]} className={`langImgB`} />
+                            </div>
+                            <div data-aos="fade-left" className={`circleC`}>
+                                <img src={languages.languages.length === 0 && languages.languages.length > 2 ? "https://www.vectorlogo.zone/logos/java/java-icon.svg" : languages.languages[2]} className={`langImgC`} />
+                            </div>
                         </div>
                     </div>
                 </div>
