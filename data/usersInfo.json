@@ -1,12 +1,26 @@
 {
   "full_name": "Maniraj Yadav",
-  "intro_tagline": "Mission-driven software engineer with a passion for web development and building impactful solutions." ,
-  "subTitle": "Problem solving is what makes me unique.",
-  "tech_year": "2026",
+  "role": "Backend Engineer",
+  "user_skill": "SDE-1 @ SwishX",
+  "focus_line": "Go · Java · Concurrency · Multithreading",
+  "hero_desc": "I build Go and Java services for a pharma distribution platform. Most of my work is on the latency path: running calls concurrently, batching queries, and cancelling cleanly.",
+  "intro_tagline": "The performance side is what I enjoy most — goroutine fan-out, context cancellation, and knowing when a problem genuinely needs concurrency versus a better data model.",
+  "subTitle": "Backend engineer, mostly Go and Java.",
   "github_username": "manirajyadav-1",
-  "user_skill": "Software Engineer",
   "greeting_type": "Hey ✌",
   "bio_desc": [
-    "As a software developer, I enjoy using my obsessive attention to detail, my unequivocal love for making things, and my mission-driven work ethic to literally change the world. That's why I’m excited to make a big impact at a high growth company."
-  ]
+    "I'm a final-year Computer Science student at SRM University AP, currently an SDE-1 at SwishX in Bengaluru, where I build backend services for a pharma distribution platform. Much of my work is making requests that touch several services return fast — running independent calls concurrently so a response costs the slowest one instead of the sum of all of them, batching what would otherwise be hundreds of round trips, and making sure that when a request is cancelled, the work still in flight gets torn down with it.",
+    "I built a 6-level sales hierarchy engine on recursive PostgreSQL CTEs, automated an MOQ-based cashback flow that replaced a manual points-grant process across 90 schemes and 568 rules, and shipped a CMS backend in Go delivering 20+ REST APIs with Redis caching and S3 storage.",
+    "On the side: a RAG-based Git analyzer that answers questions about a repo's commit history, an AI resume builder, and a roommate-finding app. Oracle Certified Professional for Java SE 17, and an open-source contributor. Away from the screen I volunteer with NSS — blood donation camps and beach clean-ups, mostly."
+  ],
+  "focus": [
+    "API design",
+    "data modelling",
+    "schema design",
+    "query optimization",
+    "latency",
+    "scalability",
+    "system design"
+  ],
+  "open_to": "backend roles"
 }

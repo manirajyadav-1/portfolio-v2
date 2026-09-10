@@ -1,12 +1,14 @@
-import { Layout, Intro, Container, Projects, Contact, Footer, Quote, DomHead } from "../components";
-import { useEffect } from "react";
+import { useEffect } from "react"
 import Aos from "aos"
-import { DataContextProvider } from "../context/DataContext";
+import {
+    Layout, Container, Intro, Stack, Experience, Education,
+    Projects, Architecture, OpenSource, Contact, Footer, DomHead
+} from "../components"
+import { DataContextProvider } from "../context/DataContext"
 
 export default function HomePage() {
-
     useEffect(() => {
-        Aos.init({ duration: "1000" })
+        Aos.init({ duration: 700, once: true, offset: 60 })
     }, [])
 
     return (
@@ -14,13 +16,17 @@ export default function HomePage() {
             <DomHead />
             <Layout>
                 <Container>
-                    <Intro />
-                    <Projects />
+                    <Intro        index={1} />
+                    <Stack        index={2} />
+                    <Experience   index={3} />
+                    <Education    index={4} />
+                    <Projects     index={5} />
+                    <Architecture index={6} />
+                    <OpenSource   index={7} />
                 </Container>
-                <Contact />
+                <Contact index={8} />
                 <Footer />
             </Layout>
         </DataContextProvider>
     )
 }
-

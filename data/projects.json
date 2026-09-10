@@ -1,53 +1,86 @@
 {
-    "projects":[
-        {
-            "title": "Git Analyzer",
-            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/git_analyzer/refs/heads/main/output/HomePage.png",
-            "project_url": "https://github.com/manirajyadav-1/git_analyzer",
-            "description": "A powerful Git repository analysis tool that leverages AI to provide insights into code evolution, commit patterns, and development trends.",
-            "tags": [ "java", "react", "springboot", "pgvector" ]
-        },
-        {
-            "title": "AI Resume Builder",
-            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/AI_Resume_Builder/refs/heads/main/output/GenerateResume.png",
-            "project_url": "https://github.com/manirajyadav-1/AI_Resume_Builder",
-            "description": "AI Resume Builder generates personalized, professional resumes from a simple prompt, instantly formatting them into 5+ recruiter-friendly templates.",
-            "tags": [ "react", "springboot", "java" ]
-        },
-        {
-            "title": "FarmAi",
-            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1744915165/FarmAi/w9s1ecyynstchzgfiayg.png",
-            "project_url": "https://github.com/manirajyadav-1/FarmAI.git",
-            "description": "A reliable plant disease detection system to help farmers identify issues, manage pesticides, and improve crop yield sustainably.",
-            "tags": [ "react", "springboot", "java"  ]
-        },
-        {
-            "title": "SnapSolve",
-            "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/SnapSolve/refs/heads/main/output/SnapSolveOutput.png",
-            "project_url": "https://github.com/manirajyadav-1/SnapSolve",
-            "description": "A Spring Boot application that extracts multiple-choice questions from screenshots and provides AI-generated answers using Google's Gemini AI.",
-            "tags": [ "java", "springboot", "react"  ]
-        },
-        {
-            "title": "Amigo",
-            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1741932141/Amigo/flcbeetj8pjahbtbxzxx.png",
-            "project_url": "https://github.com/manirajyadav-1/Amigo",
-            "description": "Roommate finder app that allows authorized users to post listings, send requests, and navigate an integrated map for better matches.",
-            "tags": [ "react", "firebase", "zustand"  ]
-        },
-        {
-            "title": "Newsmania",
-            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1719375462/Newsmania/qafdk3cspsury8xq0rls.png",
-            "project_url": "https://github.com/manirajyadav-1/Newsmania",
-            "description": "News WebApp delivering the latest headlines from top newspapers in India and the USA, covering leading sources for real-time updates.",
-            "tags": [ "react", "nodejs", "mongodb"  ]
-        },
-        {
-            "title": "Ecommerce",
-            "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1720721737/xdod1wt6sqi9lwxa8xlk.png",
-            "project_url": "https://github.com/manirajyadav-1/Ecommerce",
-            "description": "E-commerce website project aims to create a comprehensive online shopping platform for clothing.",
-            "tags": [ "react", "nodejs", "mongodb"  ]
-        }
-    ]
+  "projects": [
+    {
+      "title": "Git Analyzer",
+      "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/git_analyzer/refs/heads/main/output/HomePage.png",
+      "project_url": "https://github.com/manirajyadav-1/git_analyzer",
+      "description": "A RAG-based repository insight engine giving contextual answers on code evolution, commit patterns and development trends. Semantic search, Q&A and summarisation over 1,000+ commits, with dependency graphs and contribution heatmaps.",
+      "tags": [
+        "java",
+        "spring boot",
+        "react",
+        "pgvector",
+        "ollama"
+      ]
+    },
+    {
+      "title": "AI Resume Builder",
+      "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/AI_Resume_Builder/refs/heads/main/output/GenerateResume.png",
+      "project_url": "https://github.com/manirajyadav-1/AI_Resume_Builder",
+      "description": "Full-stack app generating personalised resumes from 5+ templates, with JWT/OAuth2 auth, real-time editing and PDF export — cutting resume creation time by 80%.",
+      "tags": [
+        "react",
+        "spring boot",
+        "java",
+        "postgresql",
+        "oauth2"
+      ]
+    },
+    {
+      "title": "FarmAi",
+      "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1744915165/FarmAi/w9s1ecyynstchzgfiayg.png",
+      "project_url": "https://github.com/manirajyadav-1/FarmAI.git",
+      "description": "A reliable plant disease detection system to help farmers identify issues, manage pesticides, and improve crop yield sustainably.",
+      "tags": [
+        "react",
+        "springboot",
+        "java"
+      ]
+    },
+    {
+      "title": "SnapSolve",
+      "imageUrl": "https://raw.githubusercontent.com/manirajyadav-1/SnapSolve/refs/heads/main/output/SnapSolveOutput.png",
+      "project_url": "https://github.com/manirajyadav-1/SnapSolve",
+      "description": "A Spring Boot application that extracts multiple-choice questions from screenshots and provides AI-generated answers using Google's Gemini AI.",
+      "tags": [
+        "java",
+        "springboot",
+        "react"
+      ]
+    },
+    {
+      "title": "Amigo",
+      "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1741932141/Amigo/flcbeetj8pjahbtbxzxx.png",
+      "project_url": "https://github.com/manirajyadav-1/Amigo",
+      "description": "Roommate-finding platform with search, property listings and interactive map visualisation. Optimised Firestore queries and Zustand state management improved data retrieval by 40%.",
+      "tags": [
+        "react",
+        "firebase",
+        "firestore",
+        "zustand"
+      ]
+    },
+    {
+      "title": "Newsmania",
+      "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1719375462/Newsmania/qafdk3cspsury8xq0rls.png",
+      "project_url": "https://github.com/manirajyadav-1/Newsmania",
+      "description": "News WebApp delivering the latest headlines from top newspapers in India and the USA, covering leading sources for real-time updates.",
+      "tags": [
+        "react",
+        "nodejs",
+        "mongodb"
+      ]
+    },
+    {
+      "title": "Ecommerce",
+      "imageUrl": "https://res.cloudinary.com/ddavdy2aa/image/upload/v1720721737/xdod1wt6sqi9lwxa8xlk.png",
+      "project_url": "https://github.com/manirajyadav-1/Ecommerce",
+      "description": "E-commerce website project aims to create a comprehensive online shopping platform for clothing.",
+      "tags": [
+        "react",
+        "nodejs",
+        "mongodb"
+      ]
+    }
+  ]
 }

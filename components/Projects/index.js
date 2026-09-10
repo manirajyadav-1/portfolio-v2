@@ -1,201 +1,169 @@
-
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { FaStar, FaArrowRight, FaQuoteRight } from "react-icons/fa"
-import { AiFillGithub } from "react-icons/ai"
+import { FaStar, FaCodeBranch, FaArrowRight } from "react-icons/fa"
 
-import { projects } from "../../data/projects.json"
+import Section from "../Section"
+import projectsData from "../../data/projects.json"
+const { projects } = projectsData
 import userInfo from "../../data/usersInfo.json"
 
-function Projects() {
+const REPO_CACHE_KEY = "user_repos"
 
-    const [repo, setRepo] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+// Shared fetch: cache under ONE key so we stop burning the 60/hr anon limit.
+export async function loadRepos(sort = "?sort=created&direction=desc") {
+    const cached = localStorage.getItem(REPO_CACHE_KEY)
+    if (cached) return JSON.parse(cached)
 
-    async function fetchRepos() {
-        let res;
-        let url = `https://api.github.com/users/${userInfo.github_username}/repos?sort=created&direction=desc`
-        if (localStorage.getItem("user_repos") === null) {
-            try {
-                setLoading(true)
-                res = await fetch(url)
-                let data = await res.json()
-                setLoading(false)
-                if (data && data.length > 0) {
-                    localStorage.setItem("user_repo", JSON.stringify(data))
-                    setRepo(data)
-                    return
-                }
-                setLoading(false)
-                setError(`No github repos found.`)
-            }
-            catch (err) {
-                console.error(`FAILED: ${err.message}`)
-                setLoading(false)
-                setError(`Failed fetching repo: ${err.message}`)
-            }
-        }
+    const res = await fetch(`https://api.github.com/users/${userInfo.github_username}/repos${sort}`)
+    if (!res.ok) throw new Error(`GitHub responded ${res.status}`)
+    const data = await res.json()
+    if (!Array.isArray(data)) throw new Error("Unexpected response from GitHub")
 
-        let userReopos = JSON.parse(localStorage.getItem("user_repos"))
+    localStorage.setItem(REPO_CACHE_KEY, JSON.stringify(data))
+    return data
+}
 
-        setRepo(userReopos)
-    }
-
-    useEffect(() => {
-
-        (async () => {
-            await fetchRepos()
-        })()
-
-    }, [])
-
+function Projects({ index = 5 }) {
     return (
-        <>
-            <div id="projects" className={`projectCont w-full h-auto relative top-[50px] p-10px flex flex-col items-center justify-center mb-[50px]`}>
-            <div className={`w-full flex flex-row items-center justify-center`}>
-                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
-                <p data-aos="fade-up" className={`text-white-200 text-[20px]`}>Latest Works</p>
-                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
-
-
-                <Link href="/projects">
-                    <a data-aos="zoom-in-up" className={`text-center text-green-200 underline absolute top-[50px] text-[14px]`}>All Projects</a>
-                </Link>
-            </div>
-
-            <div className={`projects w-full h-auto p-3 flex flex-row flex-wrap items-center justify-between mb-[50px]`}>
-                {
-                    projects.length > 0 ?
-                        projects.slice(0, 6).map((list, i) => {
-                            return (
-                                <div data-aos="zoom-in" key={i} className={`box w-full h-auto bg-dark-200 rounded-[5px] relative top-[50px] transition-all mb-[50px] mr-[5px] opacity-[.7] md:w-[250px] hover:opacity-[1]`} >
-                                    <div className="imgCont"></div>
-                                    <style jsx>{`
-                                .imgCont{
-                                    width: 100%;
-                                    height: 190px;
-                                    background-image: url(${list.imageUrl === "" || list.imageUrl === null ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fcoding%2F&psig=AOvVaw0CQ1oOdY9kRJdlFgB0luDX&ust=1720807568236000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCRpfHJn4cDFQAAAAAdAAAAABAO" : list.imageUrl});
-                                    background-size: cover;
-                                    background-repeat: no-repeat;
-                                    background-position: center;
-                                    box-shadow: 0px 0px 3px #000;
-                                    border-radius: 5px;
-                                }
-                            `}</style>
-                                    <div className={`w-full p-[10px] bottom-[5px]`}>
-                                        <div className="w-full h-auto">
-                                            <p className={`text-[15px] text-white-200`}>{list.title === "" ? "Project Title" : list.title}</p>
-                                            <br />
-                                            <small>{list.description === "" ? "some dummy description" : list.description}</small>
-                                        </div>
-                                        <br />
-                                        <div className={` bottom-[5px] left-[5px] p-0 flex items-start justify-start`}>
-                                            {
-                                                list.tags.length > 0 ?
-                                                    list.tags.slice(0, 3).map((tag, i) => {
-                                                        return (
-                                                            <span key={i} className={`text-[10px] py-[3px] px-[9px] bg-dark-100 mr-[2px] rounded-[2px] text-white-100`}>{tag}</span>
-                                                        )
-                                                    })
-                                                    :
-                                                    ""
-                                            }
-                                        </div>
-                                        <span className={`absolute  my-[-20px] right-[10px] text-[12px] flex items-center justify-start`}>
-                                            {
-                                                list.project_url !== "" ?
-                                                    <>
-                                                        <a href={list.project_url} className={`text-white-200 mr-[10px] hover:underline hover:text-white-100`} target="_blank">
-                                                            View
-                                                        </a>
-                                                        <ion-icon name="arrow-forward-outline" className={`ml-[10px] p-[10px]`}></ion-icon>
-                                                    </>
-                                                    :
-                                                    ""
-                                            }
-                                        </span>
-
-                                    </div>
-                                </div>
-                            )
-                        })
-                        :
-                        ""
+            <Section
+                id="projects"
+                index={index}
+                label="Selected Work"
+                title="Things I've built"
+                desc="Mostly Spring Boot services with a React surface on top. Each one solved a problem I actually had."
+                action={
+                    <Link href="/projects">
+                        <a data-aos="fade-up" className="mono text-[12px] text-green-200 flex items-center gap-2 hover:text-green-100">
+                            all projects <FaArrowRight className="text-[10px]" />
+                        </a>
+                    </Link>
                 }
-            </div>
-        </div>
-        <div className={`w-full flex flex-col items-center justify-center`}>
-            <div className={`w-full flex flex-row items-center justify-center`}>
-                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
-                <p data-aos="fade-up" className={`text-white-200 text-[20px]`}>Github Repos</p>
-                <span data-aos="zoom-in" className={`w-[100px] h-[2px] rounded-[30px] m-[20px] bg-green-200 md:w-[120px]`}></span>
-            </div>
-            <a data-aos="zoom-in-up" className={`text-center text-green-200 underline text-[14px]`}>Latest Contribution</a>
-        </div>
-         <div className="w-full h-auto mt-4 mb-5 p-3 flex flex-row flex-wrap items-center justify-between ">
-           
-             {loading ? "Loading..." : error !== null ? <p>{error}</p> : <GithubRepo repos={repo} />}
-         </div>
-        </>
+            >
+                <div className="w-full grid grid-cols-1 gap-[16px] md:grid-cols-2 lg:grid-cols-3">
+                    {projects.slice(0, 6).map((p, i) => (
+                        <ProjectCard key={p.title} project={p} delay={i * 60} />
+                    ))}
+                </div>
+            </Section>
+
     )
 }
 
 export default Projects
 
-function GithubRepo({ repos }) {
+export function ProjectCard({ project, delay = 0 }) {
+    const { title, description, imageUrl, project_url, tags } = project
 
     return (
-        <>
-            {
-                repos.length > 0 ?
-                    repos.slice(0, 6).map((rep, i) => {
-                        return (
-                            <div data-aos="zoom-in" key={i} className="relative w-full h-[180px] bg-dark-200 flex flex-col items-start justify-start px-4 py-3 mt-2 rounded-md md:w-[300px] ">
-                                <h2 className="w-full text-[20px] ">{rep.name}</h2>
-                                <br />
-                                <p className=" w-full text-[15px] text-white-300 ">{rep.description && rep.description.length > 50 ? rep.description.slice(0, 60) + "...." : rep.description}</p>
-                                <br />
-                                <div className="ratings absolute bottom-4 w-full flex flex-row items-start justify-start">
-                                    <span className="mr-2 flex flex-row items-start justify-start">
-                                        <StarRatings title="star" count={rep.stargazers_count} />
-                                    </span>
-                                    <span className="mr-2 flex flex-row items-start justify-start">
-                                        <StarRatings title="fork" count={rep.forks} />
-                                    </span>
-                                </div>
+        <a
+            href={project_url || "#"}
+            target="_blank"
+            rel="noreferrer"
+            data-aos="fade-up"
+            data-aos-delay={delay}
+            className="pane group flex flex-col overflow-hidden hover:-translate-y-[3px]"
+        >
+            {/* thumbnail */}
+            <div className="w-full h-[168px] bg-dark-200 border-b border-line-100 overflow-hidden relative">
+                {imageUrl ? (
+                    <img
+                        src={imageUrl}
+                        alt=""
+                        loading="lazy"
+                        className="w-full h-full object-cover object-top opacity-[.78] transition-all duration-300 group-hover:opacity-100 group-hover:scale-[1.03]"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center mono text-[12px] text-white-300">
+                        no preview
+                    </div>
+                )}
+            </div>
 
-                                <a href={rep.html_url} target={"_blank"} className="absolute right-3 top-2 flex flex-row items-center">
-                                    <small className="underline">View</small>
-                                    <FaArrowRight className="ml-2 text-[12px] " />
-                                </a>
-                            </div>
-                        )
-                    })
-                    :
-                    "Opps, No Github Repo was found."
-            }
-        </>
+            <div className="p-[18px] flex flex-col flex-1">
+                <h3 className="text-[16px] font-bold mb-[9px] transition-colors group-hover:text-green-200">
+                    {title || "Untitled project"}
+                </h3>
+
+                <p className="text-[13px] leading-[1.65] text-white-200 mb-[16px] flex-1">
+                    {description}
+                </p>
+
+                <div className="flex flex-row flex-wrap gap-[6px]">
+                    {(tags || []).slice(0, 4).map((tag) => (
+                        <span key={tag} className="chip">{tag}</span>
+                    ))}
+                </div>
+            </div>
+        </a>
     )
 }
 
-function StarRatings({ count = 1, size = 3, title = "star" }) {
+export function RepoGrid({ repos, loading, error, limit = 6 }) {
+    if (loading) {
+        return (
+            <div className="w-full grid grid-cols-1 gap-[16px] md:grid-cols-2 lg:grid-cols-3">
+                {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="pane p-[20px] h-[150px] animate-pulse">
+                        <div className="w-1/2 h-[13px] bg-line-100 rounded mb-[14px]" />
+                        <div className="w-full h-[10px] bg-line-100 rounded mb-[8px]" />
+                        <div className="w-3/4 h-[10px] bg-line-100 rounded" />
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    if (error) {
+        return (
+            <p className="mono text-[13px] text-white-200 border border-line-100 rounded-[9px] p-[18px] bg-dark-100">
+                <span className="text-red-200">!</span> Couldn&apos;t reach GitHub — {error}
+            </p>
+        )
+    }
+
+    if (!repos || repos.length === 0) {
+        return <p className="mono text-[13px] text-white-300">No public repositories found.</p>
+    }
 
     return (
-        <>
-            {
-                title === "star" ?
+        <div className="w-full grid grid-cols-1 gap-[16px] md:grid-cols-2 lg:grid-cols-3">
+            {repos.slice(0, limit).map((repo, i) => (
+                <a
+                    key={repo.id || repo.name}
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-aos="fade-up"
+                    data-aos-delay={i * 50}
+                    className="pane group p-[20px] flex flex-col hover:-translate-y-[3px]"
+                >
+                    <div className="flex items-start justify-between gap-3 mb-[10px]">
+                        <h3 className="mono text-[14px] text-white-100 break-all transition-colors group-hover:text-green-200">
+                            {repo.name}
+                        </h3>
+                        <FaArrowRight className="text-[11px] text-white-300 shrink-0 mt-[4px] transition-all group-hover:text-green-200 group-hover:-rotate-45" />
+                    </div>
 
-                    Array(1).fill(1).map((i) => {
-                        return (
-                            <FaStar key={i * Math.floor(Math.random() * 1000)} className={`text-green-200 text-[${size}px] `} />
-                        )
-                    })
-                    :
-                    <AiFillGithub className={`text-green-200 text-[${size}px] `} />
-            }
-            <small className="ml-2 text-white-200 font-extrabold">{count}</small>
-            <small className="ml-2 text-white-200">{title}</small>
-        </>
+                    <p className="text-[13px] leading-[1.6] text-white-200 flex-1 mb-[16px]">
+                        {repo.description || <span className="text-white-300 italic">No description.</span>}
+                    </p>
+
+                    <div className="flex flex-row items-center gap-[16px] mono text-[11px] text-white-300">
+                        {repo.language && (
+                            <span className="flex items-center gap-[6px]">
+                                <i className="w-[8px] h-[8px] rounded-full bg-green-200 inline-block" />
+                                {repo.language}
+                            </span>
+                        )}
+                        <span className="flex items-center gap-[5px]">
+                            <FaStar className="text-[10px]" /> {repo.stargazers_count ?? 0}
+                        </span>
+                        <span className="flex items-center gap-[5px]">
+                            <FaCodeBranch className="text-[10px]" /> {repo.forks ?? 0}
+                        </span>
+                    </div>
+                </a>
+            ))}
+        </div>
     )
 }

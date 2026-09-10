@@ -7,5 +7,10 @@ export { default as DomHead } from "./Head"
 export { default as Intro } from "./Intro"
 export { default as Projects } from "./Projects"
 export { default as Contact } from "./Contact"
-
-
+export { default as Section } from "./Section"
+export { default as Stack } from "./Stack"
+export { default as Experience } from "./Experience"
+export { default as Architecture } from "./Architecture"
+export { default as OpenSource } from "./OpenSource"
+export { default as Education } from "./Education"
+export { default as Timeline } from "./Timeline"

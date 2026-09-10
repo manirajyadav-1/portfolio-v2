@@ -1,0 +1,28 @@
+{
+  "stack": [
+    {
+      "group": "Languages",
+      "items": ["Java", "Go", "Python", "JavaScript", "C/C++", "SQL"]
+    },
+    {
+      "group": "Backend & APIs",
+      "items": ["Gin", "Spring Boot", "Spring AI", "Spring Security", "JPA", "Hibernate", "Microservices", "REST APIs"]
+    },
+    {
+      "group": "Data, Cloud & DevOps",
+      "items": ["PostgreSQL", "Redis", "MySQL", "MongoDB", "PGVector", "AWS", "Docker", "CI/CD", "Git & GitHub"]
+    },
+    {
+      "group": "AI & Agents",
+      "items": ["RAG", "LangChain", "TensorFlow", "Scikit-learn", "NumPy", "Pandas"]
+    },
+    {
+      "group": "Engineering Practices",
+      "items": ["Data Structures & Algorithms", "OOP", "High-level Design", "Design Patterns", "Multi-threading", "Concurrency", "Unit Testing"]
+    },
+    {
+      "group": "Frontend",
+      "items": ["React.js", "Zustand", "Tailwind CSS"]
+    }
+  ]
+}

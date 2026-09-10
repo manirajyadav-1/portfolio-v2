@@ -1,0 +1,49 @@
+{
+  "architecture": {
+    "project": "concurrent request fan-out",
+    "tagline": "Making a request cost the slowest call, not the sum",
+    "description": "The pattern I reach for most at work. A request that needs data from several services used to run them one after another, so the response cost the total of every call. Fanning them out as goroutines and joining the results means it now costs only the slowest one \u2014 and a single cancelled request tears the whole tree down with it.",
+    "nodes": [
+      {
+        "id": "req",
+        "label": "Request",
+        "sub": "ctx"
+      },
+      {
+        "id": "handler",
+        "label": "Handler",
+        "sub": "Gin"
+      },
+      {
+        "id": "svcA",
+        "label": "Inventory",
+        "sub": "goroutine"
+      },
+      {
+        "id": "svcB",
+        "label": "Pricing",
+        "sub": "goroutine"
+      },
+      {
+        "id": "svcC",
+        "label": "Rewards",
+        "sub": "goroutine"
+      },
+      {
+        "id": "join",
+        "label": "Join",
+        "sub": "errgroup"
+      },
+      {
+        "id": "res",
+        "label": "Response",
+        "sub": "aggregated"
+      }
+    ],
+    "notes": [
+      "errgroup: the first error cancels the siblings, so nothing waits on a result that is already useless",
+      "ctx cancellation propagates -- a dropped request leaves no orphaned goroutines running",
+      "Batched reads collapse hundreds of round trips into a handful"
+    ]
+  }
+}

@@ -6,229 +6,323 @@
 @font-face {
     font-family: Poppin;
     src: url("../public/fonts/Poppins.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: FiraCode;
     src: url("../public/fonts/FiraCode.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Cario;
     src: url("../public/fonts/Cairo-Light.ttf");
+    font-display: swap;
 }
-
 
 
 :root{
-    --dark1:#0c0c0c8c;
-    --bg1: #202022;
-    --bg2: #2d2e32;
-    --bg3: #25262a;
-    --gr1: #64f4ac;
-    --gr2: #64f4acea;
-    --gr3: rgb(100, 244, 172, .7);
-    --grnbg1:#05ff82;
-    --grnbg2:#15eb80;
-    --grnbg3:rgb(3, 252, 128, .4);
-    --white1:#fff;
-    --white2:#ccc;
-    --white3:rgb(129, 129, 129);
-    --red1:#ff0000;
-    --red2:rgb(255, 0, 0, .4);
+    /* surfaces -- near-black base, layered upward */
+    --bg:        #0b0c0e;
+    --bg-band:   #101215;
+    --surface:   #181b20;
+    --raised:    #131519;
+    --line:      #23272e;
+    --line-hi:   #2e343d;
 
-    --poppin: Poppin;
-    --firacode: Firacode;
-    --cario: Cario;
-}
+    /* one accent */
+    --gr1:       #8dffc6;
+    --gr2:       #64f4ac;
+    --gr3:       #3dd98d;
+    --gr-fill:   rgba(100, 244, 172, .14);
+    --gr-edge:   rgba(100, 244, 172, .30);
+    --gr-wash:   rgba(100, 244, 172, .06);
 
-html{
-    scroll-behavior: smooth;
-}
-a{
-    text-decoration: none;
-}
+    /* text */
+    --white1:    #e9ecf1;
+    --white2:    #98a1ae;
+    --white3:    #646d7a;
+    --red1:      #ff5c5c;
 
-ul{
-    width: auto;
-    height: auto;
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
+    --poppin:    Poppin, ui-sans-serif, system-ui, sans-serif;
+    --firacode:  FiraCode, ui-monospace, SFMono-Regular, Menlo, monospace;
+    --cario:     Cario;
+
+    /* legacy aliases still referenced by the avatar rules below */
+    --bg1: var(--bg);
+    --bg2: var(--surface);
+    --bg3: var(--bg-band);
 }
 
-li{
-    list-style-type: none;
-}
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
 
 body{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
     position: relative;
-    left: 0px;
     overflow-x: hidden;
     font-family: var(--poppin);
     color: var(--white1);
-    background: var(--bg1);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
 }
 
+a{ text-decoration: none; color: inherit; }
+ul, li{ list-style: none; margin: 0; padding: 0; }
 
-.navbar .right ul a:hover > .mail{
-    opacity: 1;
+::selection{ background: var(--gr-edge); color: var(--white1); }
+
+*:focus-visible{
+    outline: 2px solid var(--gr2);
+    outline-offset: 2px;
+    border-radius: 3px;
 }
 
-.navbar .right ul a .mail{
-    padding: 8px;
-    font-size: 30px;
-    background: var(--bg1);
-    color: var(--gr1);
-    border-radius: 50%;
-    opacity: .7;
+/* ------------------------------------------------------------------ *
+ *  Terminal / engineered primitives
+ * ------------------------------------------------------------------ */
+
+/* faint blueprint grid, used behind the hero */
+.gridbg{
+    position: relative;
+    isolation: isolate;
+    --cell: 64px;
+    --glow: 300px;
+    --mx: 50%;
+    --my: 40%;
+}
+.gridbg::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(to right,  var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: var(--cell) var(--cell);
+    /* fade the grid out toward the edges so it never fights the content */
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 0%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 0%, transparent 100%);
+    opacity: .55;
+    pointer-events: none;
 }
 
+/* Cursor spotlight: the same grid drawn in the accent colour, revealed only
+   inside a radial mask that tracks the pointer -- so the cells the mouse is
+   over appear to light up. --mx/--my are written by the listener in _app.js. */
+.gridbg::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(to right,  var(--gr2) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--gr2) 1px, transparent 1px),
+        radial-gradient(circle at var(--mx) var(--my), var(--gr-fill) 0%, transparent 68%);
+    background-size: var(--cell) var(--cell), var(--cell) var(--cell), 100% 100%;
+    -webkit-mask-image: radial-gradient(circle var(--glow) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.75) 32%, rgba(0,0,0,.28) 58%, transparent 80%);
+            mask-image: radial-gradient(circle var(--glow) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.75) 32%, rgba(0,0,0,.28) 58%, transparent 80%);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+    will-change: opacity;
+}
+.gridbg.is-lit::after{ opacity: .8; }
+
+/* monospace eyebrow: "01 / PROFILE" */
+.eyebrow{
+    font-family: var(--firacode);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--white3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.eyebrow .idx{ color: var(--gr2); }
+.eyebrow::after{
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--line), transparent);
+}
+
+.mono{ font-family: var(--firacode); }
+
+/* a card that reads like a terminal pane */
+.pane{
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+.pane:hover{
+    border-color: var(--line-hi);
+    background: var(--surface);
+}
+
+/* the three window dots */
+.dots{ display: inline-flex; gap: 6px; align-items: center; }
+.dots i{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--line-hi);
+    display: block;
+}
+.dots i:first-child{ background: #ff5f57; }
+.dots i:nth-child(2){ background: #febc2e; }
+.dots i:nth-child(3){ background: #28c840; }
+
+/* chip / tag */
+.chip{
+    font-family: var(--firacode);
+    font-size: 11px;
+    line-height: 1;
+    padding: 5px 9px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--white2);
+    background: var(--bg);
+    white-space: nowrap;
+    transition: all .18s ease;
+}
+.chip-accent{
+    color: var(--gr2);
+    border-color: var(--gr-edge);
+    background: var(--gr-wash);
+}
+
+/* primary / ghost buttons */
+.btn{
+    font-family: var(--firacode);
+    font-size: 13px;
+    padding: 11px 20px;
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .18s ease;
+    white-space: nowrap;
+}
+.btn-primary{
+    background: var(--gr2);
+    color: #06140d;
+    font-weight: 700;
+}
+.btn-primary:hover{ background: var(--gr1); transform: translateY(-1px); }
+.btn-ghost{
+    border-color: var(--line);
+    color: var(--white1);
+    background: transparent;
+}
+.btn-ghost:hover{ border-color: var(--gr-edge); color: var(--gr2); background: var(--gr-wash); }
+
+/* blinking terminal caret */
+.caret{
+    display: inline-block;
+    width: 9px;
+    height: 1.05em;
+    background: var(--gr2);
+    vertical-align: text-bottom;
+    animation: blink 1.1s steps(2, start) infinite;
+}
+@keyframes blink{ to{ visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce){
+    .caret{ animation: none; }
+    html{ scroll-behavior: auto; }
+    *{ transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    /* AOS hides [data-aos] at opacity 0 until it animates in -- with motion
+       off, reveal everything immediately instead of leaving blank sections */
+    [data-aos]{ opacity: 1 !important; transform: none !important; }
+    .gridbg.is-lit::after{ opacity: 0; }
+    /* stop the logos orbiting, but keep them on the rim */
+    .header .orbit, .header .langImg{ animation: none !important; }
+    .tl-dot.is-current{ animation: none; }
+}
+
+/* Same safety net when JS never runs: without it every scroll-revealed
+   section would render permanently invisible. */
+.no-js [data-aos]{ opacity: 1 !important; transform: none !important; }
+
+/* ------------------------------------------------------------------ *
+ *  Mobile bottom nav
+ * ------------------------------------------------------------------ */
 .mobileNav{
     width: 100%;
-    height: auto;
-    padding:0px;
+    padding: 0px;
     margin: 0px auto;
     position: fixed;
     left: 0px;
-    bottom: -5px;
-    background: var(--bg3);
-    box-shadow: 0px 0px 4px #000;
+    bottom: 0px;
+    background: rgba(16, 18, 21, .92);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
     z-index: 1000;
     overflow: hidden;
 }
 
-
 .mobileNav .main{
-    width: 100vmin;
-    max-height: 70px;
+    width: 100%;
+    max-width: 460px;
+    max-height: 68px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0px auto;
     padding: 0px;
 }
 
-.mobileNav .main .li{
-    list-style: none;
+.mobileNav .main .li,
+.mobileNav .main .active{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    transition:all .2s ease;
-    padding: 10px;
+    transition: all .2s ease;
+    padding: 9px 12px;
     cursor: pointer;
-    margin-top: 10px;
-    margin-right: 20px;
 }
-
 
 .mobileNav .main li .icon{
     font-size: 20px;
-    padding: 15px;
-    transition:all .2s ease;
-}
-
-.mobileNav .main .li label{
-    font-size: 12px;
-    font-weight: 300;
-    transition:all .3s ease;
-    transform: translateY(100px);
-}
-
-
-.mobileNav .main .li:hover > label{
-    display: flex;
-    transition:all .3s ease;
-    transform: translateY(-2px);
-    color: var(--gr2);
-}
-
-.mobileNav .main .li:hover > .icon{
-    background: var(--bg1);
+    padding: 8px;
     border-radius: 50%;
-    color: var(--gr2);
-    transition:all .2s ease;
+    transition: all .2s ease;
+    color: var(--white2);
 }
 
-/* when nav is active */
-
-.mobileNav .main .active{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    transition:all .2s ease;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
+.mobileNav .main .li label,
 .mobileNav .main .active > label{
-    font-size: 12px;
-    font-weight: 300;
-    transition:all .3s ease;
-    transform: translateY(-2px);
-    color: var(--gr2);
+    font-family: var(--firacode);
+    font-size: 10px;
+    font-weight: 400;
+    transition: all .2s ease;
+    color: var(--white3);
+    cursor: pointer;
 }
 
+.mobileNav .main .li:hover > .icon,
 .mobileNav .main .active > .icon{
-    padding: 7px;
-    background: var(--bg1);
-    border-radius: 50%;
+    background: var(--gr-fill);
     color: var(--gr2);
-    transition:all .2s ease;
 }
+.mobileNav .main .li:hover > label,
+.mobileNav .main .active > label{ color: var(--gr2); }
 
-
-@media(max-width:700px){
-    .navbar .left{
-        /* display: none; */
-    }
-}
-
-
-.header .main{
-    width: 50%;
-    height: auto;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.header .mainArea{
-    width: 300px;
-    height: 300px;
-    background: var(--bg3);
-    border-radius: 50%;
-    padding: 15vmin;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-
-.header .mainArea .avatar{
-    width: 45vmax;
-}
 
 /* One scale drives everything: the avatar circle sizes off vmin, and the logos
    are a PERCENTAGE of that circle -- so they keep the same relative position
    and size on any screen instead of scaling independently of it. */
 .header .avatarCol{
+    /* the hero row centres its two columns against each other */
     align-self: center;
-    /* the text column carries mb-[50px], which stretches the flex line and
-       pushes a centred avatar 25px low -- match it so both columns centre alike */
-    margin-bottom: 50px;
 }
 
 .header .img-cont{
@@ -240,53 +334,125 @@ body{
        -------------------------------------------------------------------- */
     --avatar-nudge: 0px;
 
-    width: max(250px, 40vmin);
+    /* seconds for one full lap of the logos around the photo */
+    --orbit-duration: 30s;
+
+    /* the photo is untouched until this radius, then feathers to the page
+       colour -- raise it for a smaller blend band, lower it for a wider one */
+    --edge-start: 66%;
+
+    /* 40vmin as before, but capped so it stops dominating on very large
+       screens -- the cap only engages above ~1200vmin, so laptops are
+       unchanged (1440x900 -> 360px, 1920x1080 -> 432px, same as before). */
+    width: clamp(250px, 40vmin, 480px);
     aspect-ratio: 1 / 1;
     margin: 0 auto;
     transform: translateY(var(--avatar-nudge));
+
+    background-color: var(--surface);
+    background-image: var(--avatar, none);
+    background-size: cover;
+    background-position: center;
 }
 
-.header .circleA,
-.header .circleB,
-.header .circleC{
+/* Timeline nodes: every entry reads as accent green, but the weight differs --
+   a finished entry is a soft tinted dot, a current one is solid and glowing. */
+.tl-dot{
+    background: var(--gr-fill);
+    border-color: var(--gr-edge);
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tl-dot.is-past{
+    background: var(--gr-fill);
+    border-color: var(--gr-edge);
+}
+.tl-dot.is-current{
+    background: var(--gr2);
+    border-color: var(--gr2);
+    box-shadow: 0 0 0 5px var(--gr-wash), 0 0 14px var(--gr-edge);
+    animation: dot-pulse 2.6s ease-in-out infinite;
+}
+/* must come after .is-current: same specificity, so source order decides */
+.tl-dot.is-current.no-pulse{ animation: none; }
+
+@keyframes dot-pulse{
+    0%, 100%{ box-shadow: 0 0 0 4px var(--gr-wash), 0 0 10px var(--gr-edge); }
+    50%     { box-shadow: 0 0 0 8px transparent,    0 0 18px var(--gr-edge); }
+}
+
+/* Rim feather only: fully transparent across the centre of the photo, so the
+   image itself is untouched -- it just melts into the page colour at the
+   very edge. A pseudo-element (not a mask) so the orbiting logos, which are
+   real children, are unaffected; they sit above it on z-index 100. */
+.header .img-cont::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle closest-side at 50% 50%,
+        transparent var(--edge-start),
+        rgba(11, 12, 14, .40) 84%,
+        var(--bg) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.header .orbit{
     position: absolute;
     inset: 0;
     border-radius: 50%;
     pointer-events: none;
+    /* above the rim gradient, which sits at z-index 0 */
+    z-index: 5;
+    transform-origin: 50% 50%;
+    animation: orbit var(--orbit-duration, 30s) linear infinite;
 }
 
-.header .langImgA,
-.header .langImgB,
-.header .langImgC{
-    width: 26%;
+/* Size and offset are a PERCENTAGE of the circle, so the logos keep their
+   position and scale on any screen. left/top come from rimPositions(). */
+.header .langImg{
+    width: 24%;
     aspect-ratio: 1 / 1;
-    padding: 2.6%;
+    padding: 2.4%;
     position: absolute;
     transform: translate(-50%, -50%);
-    background: var(--bg2);
+    /* the badge has to stay legible over the bright photo AND over the faded
+       rim, so: a dark halo to punch it out of the background, then an accent
+       outline that defines the disc whatever is behind it */
+    background: #1b1f26;
+    border: 1px solid var(--gr-edge);
     border-radius: 50%;
-    box-shadow: 0px 0px 15px var(--bg1);
+    box-shadow: 0 0 0 5px var(--bg), 0 4px 18px rgba(0, 0, 0, .7);
     z-index: 100;
     pointer-events: auto;
-    transition: all .2s ease;
+    /* counter-spin at the same rate so each logo stays upright while it
+       travels around the rim */
+    animation: orbit-upright var(--orbit-duration, 30s) linear infinite;
+    /* `scale` is its own property, so hover can't clobber the animated
+       transform */
+    transition: scale .2s ease, box-shadow .2s ease;
+}
+.header .langImg:hover{
+    scale: 1.12;
+    border-color: var(--gr-edge);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 22px var(--gr-edge);
 }
 
-/* rim coordinates: cos/sin 45deg = .7071 -> 50% +/- 35.36% */
-.header .circleA .langImgA{ left: 85.36%; top: 14.64%; }  /* top-right */
-.header .circleB .langImgB{ left: 85.36%; top: 85.36%; }  /* bottom-right */
-.header .circleC .langImgC{ left: 0%;     top: 50%;    }  /* left */
-
-.header .langImgA:hover{
-    filter: grayscale(0%);
+/* pause the orbit while someone is inspecting a logo */
+.header .img-cont:hover .orbit,
+.header .img-cont:hover .langImg{
+    animation-play-state: paused;
 }
 
-.header .langImgB:hover{
-    filter: grayscale(0%);
+@keyframes orbit{
+    from{ transform: rotate(0deg); }
+    to  { transform: rotate(360deg); }
+}
+@keyframes orbit-upright{
+    from{ transform: translate(-50%, -50%) rotate(0deg); }
+    to  { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
-.header .langImgC:hover{ 
-    filter: grayscale(0%);
-} 
 
 
 @media(max-width: 700px) {

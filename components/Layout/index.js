@@ -1,34 +1,27 @@
-
 import React, { useEffect, useState } from "react"
-
-
-import { NavBar, Footer, Header, DomHead } from ".."
+import { NavBar, Header, DomHead } from ".."
 import { ResponsiveNavbar } from "../Navbar"
 
-
 function Layout({ children }) {
+    const [isMobile, setIsMobile] = useState(false)
 
-  const [windowWidth, setWindowWidth] = useState(0)
+    useEffect(() => {
+        const onResize = () => setIsMobile(window.innerWidth <= 700)
+        onResize()
+        window.addEventListener("resize", onResize)
+        return () => window.removeEventListener("resize", onResize)
+    }, [])
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    window.addEventListener("resize", () => {
-      setWindowWidth(window.innerWidth)
-    })
-  }, [windowWidth])
-
-  return (
-    <div className={`w-screen h-screen`}>
-      <DomHead />
-      <Header>
-        <NavBar />
-      </Header>
-      {children}
-      {windowWidth <= 700 && <ResponsiveNavbar />}
-      {/* <Footer /> */}
-    </div>
-  )
+    return (
+        <div className="w-full min-h-screen">
+            <DomHead />
+            <Header>
+                <NavBar />
+            </Header>
+            {children}
+            {isMobile && <ResponsiveNavbar />}
+        </div>
+    )
 }
 
 export default Layout
-

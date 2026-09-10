@@ -1,0 +1,52 @@
+{
+  "experience": [
+    {
+      "role": "SDE-1",
+      "company": "SwishX",
+      "location": "Bengaluru, India",
+      "type": "Internship",
+      "start": "Feb 2026",
+      "end": "Present",
+      "startDate": "2026-02",
+      "current": true,
+      "summary": "Backend engineering on a pharma distribution platform. Joined as a Software Developer Intern and was promoted to SDE-1 in Aug 2026.",
+      "highlights": [
+        "Built a 6-level sales hierarchy engine using recursive PostgreSQL CTEs, enabling single-query subtree retrieval across 401 employees, 19,028+ retailers and 4,038+ stockists spanning 24 states and 10 divisions.",
+        "Automated MOQ-based cashback for retailers by integrating scheme evaluation into the wallet credit flow, replacing a manual points-grant process; supports 90 active schemes and 568 MOQ rules.",
+        "Deployed a production-ready CMS backend in Go using the Factory Pattern, delivering 20+ REST APIs across 3 product verticals with Redis caching and AWS S3 storage.",
+        "Researched and evaluated 5 fuzzy string matching algorithms for automated name reconciliation during KYC verification, significantly improving approval rates for 7,000+ users."
+      ],
+      "stack": [
+        "Go",
+        "Gin",
+        "PostgreSQL",
+        "Redis",
+        "REST APIs",
+        "Microservices",
+        "Docker",
+        "AWS",
+        "CI/CD"
+      ]
+    },
+    {
+      "role": "Full Stack Developer Intern",
+      "company": "Black Komodo Investments",
+      "location": "Remote",
+      "type": "Internship",
+      "start": "Jan 2025",
+      "end": "Mar 2025",
+      "startDate": "2025-01",
+      "current": false,
+      "summary": "",
+      "highlights": [
+        "Developed and delivered scalable features using React.js and Spring Boot, reducing page load time by 20% and supporting over 1,000 monthly active users."
+      ],
+      "stack": [
+        "React.js",
+        "Spring Boot",
+        "Java",
+        "REST APIs"
+      ]
+    }
+  ]
+}

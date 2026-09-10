@@ -1,0 +1,28 @@
+{
+  "education": [
+    {
+      "school": "SRM University, AP",
+      "degree": "B.Tech — Computer Science & Engineering",
+      "start": "Oct 2022",
+      "end": "May 2026",
+      "grade": "8.58 CGPA"
+    },
+    {
+      "school": "National Infotech College",
+      "degree": "Intermediate (+2), Science",
+      "start": "Jun 2020",
+      "end": "Jul 2024",
+      "grade": "84.25%"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Oracle Certified Professional — Java SE 17 Developer",
+      "issuer": "Oracle"
+    },
+    {
+      "name": "Open Source Contributor — Dodo Payments (toggleable plan selection in the billing UI)",
+      "issuer": "Dodo Payments"
+    }
+  ]
+}

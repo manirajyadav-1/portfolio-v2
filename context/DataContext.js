@@ -55,7 +55,7 @@ export function DataContextProvider({ children }) {
       let data = await res.json();
 
       if (data) {
-        localStorage.setItem("user_repo", JSON.stringify(data));
+        localStorage.setItem("user_repos", JSON.stringify(data));
 
         console.log("USER PUBLIC REPOS UPDATED IN BACKGROUND");
       }

@@ -1,107 +1,97 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
-import { socials } from "../../data/socials.json"
-import avatar from "../../public/images/avatar/avatar.png"
-import  { Leetcode } from "../../public/images/content"
+import { FaGithub, FaLinkedin } from "react-icons/fa"
+import socialsData from "../../data/socials.json"
+const { socials } = socialsData
+import { Leetcode } from "../../public/images/content"
+
+const NAV = [
+    { href: "/", label: "home" },
+    { href: "/about", label: "about" },
+    { href: "/projects", label: "projects" },
+    { href: "#contact", label: "contact" },
+]
+
 function NavBar() {
     return (
-        <React.Fragment>
-            <div className={`navbar relative h-auto w-full flex align-center justify-between py-[20px]`}>
-                <div className={`left w-auto flex align-start items-start justify-start px-[10px] `}>
-                    <p className={`font-extrabold mr-[20px]`}>Maniraj</p>
+        <nav className="navbar relative w-full flex items-center justify-between py-[22px] px-[10px]">
+            <div className="flex items-center gap-[26px]">
+                <Link href="/">
+                    <a className="mono text-[15px] font-bold tracking-tight">
+                        maniraj<span className="text-green-200">.</span>
+                    </a>
+                </Link>
 
-                    <ul className={`relative ml-[10px] hidden md:flex`}>
-                        <li className={`mt-[5px] mr-[10px] mb-[0px] ml-[10px] transition-all hover:text-green-100 hover:font-extrabold cursor-pointer text-[12px]`}>
-                            <Link href="/">Home</Link>
+                <ul className="hidden md:flex items-center gap-[22px]">
+                    {NAV.map((item) => (
+                        <li key={item.label}>
+                            <Link href={item.href}>
+                                <a className="mono text-[12.5px] text-white-200 transition-colors hover:text-green-200">
+                                    {item.label}
+                                </a>
+                            </Link>
                         </li>
-                        <li className={`mt-[5px] mr-[10px] mb-[0px] ml-[10px] transition-all hover:text-green-100 hover:font-extrabold cursor-pointer text-[12px]`}>
-                            <Link href="/about">About</Link>
-                        </li>
-                        <li className={`mt-[5px] mr-[10px] mb-[0px] ml-[10px] transition-all hover:text-green-100 hover:font-extrabold cursor-pointer text-[12px]`}>
-                            <Link href="/projects">Projects</Link>
-                        </li>
-                        <li className={`mt-[5px] mr-[10px] mb-[0px] ml-[10px] transition-all hover:text-green-100 hover:font-extrabold cursor-pointer text-[12px]`}>
-                            <Link href="#contact">Contact</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className={`relative right w-[50vmin] hidden md:flex `}>
-                    <ul className={`flex flex-row align-center justify-between items-center`}>
-                        {socials["github"] !== "" &&
-                            <a href={socials["github"]} target="_blank" className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white `}>
-                                <FaGithub className={`mr-[5px]`} />
-                                <small>Github</small>
-                            </a>}
-                        {socials["leetcode"] !== "" &&
-                            <a href={socials["leetcode"]} target="_blank" className={"w-[85px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white "}>
-                                <Leetcode className={`mr-[10px]`} />
-                                <small>LeetCode</small>
-                            </a>}
-
-                        {socials["linkedin"] !== "" &&
-                            <a href={socials["linkedin"]} target="_blank" className={`w-[100px] text-[17px] flex flex-row align-center justify-center items-center decoration-none  hover:text-white ml-2`}>
-                                <FaLinkedin className={`mr-[5px] icon mail`} />
-                                <small>LinkedIn</small>
-                            </a>}
-                    </ul>
-                </div>
-                <div className={`absolute top-[15px] right-[25px] md:hidden`}>
-                    <img src={avatar.src} className={`w-[50px] rounded-[50%] border-[2px] border-solid border-green-100 bg-dark-100 `} />
-                </div>
+                    ))}
+                </ul>
             </div>
-        </React.Fragment>
+
+            <div className="hidden md:flex items-center gap-[8px]">
+                {socials.github && (
+                    <IconLink href={socials.github} label="GitHub"><FaGithub /></IconLink>
+                )}
+                {socials.leetcode && (
+                    <IconLink href={socials.leetcode} label="LeetCode"><Leetcode /></IconLink>
+                )}
+                {socials.linkedin && (
+                    <IconLink href={socials.linkedin} label="LinkedIn"><FaLinkedin /></IconLink>
+                )}
+            </div>
+        </nav>
+    )
+}
+
+function IconLink({ href, label, children }) {
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={label}
+            title={label}
+            className="w-[34px] h-[34px] flex items-center justify-center rounded-[7px] border border-line-100 text-white-200 text-[15px] transition-all hover:text-green-200 hover:border-green-500 hover:bg-green-600"
+        >
+            {children}
+        </a>
     )
 }
 
 export default NavBar
 
 export function ResponsiveNavbar({ activePage, pageName = "" }) {
-
     const [active, setActive] = useState(activePage || "home")
 
-    function handleActive(e) {
-        let tgt = e.target.dataset;
-        let parent = e.target.parentElement.dataset;
-
-        if (Object.entries(tgt).length === 0) {
-            if (Object.entries(parent).length > 0) {
-                let { name } = parent
-                setActive(name)
-            }
-            return
-        }
-        let { name } = tgt;
-        setActive(name)
-    }
+    const items = [
+        { name: "home", icon: "home-outline", href: "/" },
+        { name: "projects", icon: "cube-outline", href: pageName === "" ? "#projects" : "/#projects" },
+        { name: "about", icon: "person-outline", href: pageName === "" ? "#about" : "/#about" },
+        { name: "contact", icon: "mail-outline", href: pageName === "" ? "#contact" : "/#contact" },
+    ]
 
     return (
-        <div className={`mobileNav`}>
-            <div className={`main`}>
-                <li className={active === "home" ? `active` : `li`} data-name="home" onClick={handleActive}>
-                    <Link href="/">
-                        <ion-icon name="home-outline" class={`icon`}></ion-icon>
-                    </Link>
-                    <label className={`label`}>Home</label>
-                </li>
-                <li className={active === "projects" ? `active` : `li`} data-name="projects" onClick={handleActive}>
-                    <Link href={pageName === "" ? "#projects" : "/#projects"}>
-                        <ion-icon name="cube-outline" class={`icon`}></ion-icon>
-                    </Link>
-                    <label className={`label`}>Projects</label>
-                </li>
-                <li className={active === "about" ? `active` : `li`} data-name="about" onClick={handleActive}>
-                    <Link href={pageName === "" ? "#about" : "/#about"}>
-                        <ion-icon name="person-outline" class={`icon`}></ion-icon>
-                    </Link>
-                    <label className={`label`}>About</label>
-                </li>
-                <li className={active === "contact" ? `active mr-5` : `li mr-5`} data-name="contact" onClick={handleActive}>
-                    <Link href={pageName === "" ? "#contact" : "/#contact"}>
-                        <ion-icon name="mail-outline" class={`icon`}></ion-icon>
-                    </Link>
-                    <label className={`label`}>Contact</label>
-                </li>
+        <div className="mobileNav">
+            <div className="main">
+                {items.map((item) => (
+                    <li
+                        key={item.name}
+                        className={active === item.name ? "active" : "li"}
+                        onClick={() => setActive(item.name)}
+                    >
+                        <Link href={item.href}>
+                            <ion-icon name={item.icon} class="icon" />
+                        </Link>
+                        <label className="label">{item.name}</label>
+                    </li>
+                ))}
             </div>
         </div>
     )

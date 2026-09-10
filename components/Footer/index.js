@@ -1,59 +1,47 @@
 import { Container } from ".."
-import { FaTwitter, FaGithub, FaFacebook, FaVoicemail, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa"
 import { AiFillMail } from "react-icons/ai"
+import socialsData from "../../data/socials.json"
+const { socials } = socialsData
 
-import { socials } from "../../data/socials.json"
+const LINKS = [
+    { key: "github", icon: <FaGithub />, label: "GitHub" },
+    { key: "linkedin", icon: <FaLinkedin />, label: "LinkedIn" },
+    { key: "email", icon: <AiFillMail />, label: "Email" },
+    { key: "facebook", icon: <FaFacebook />, label: "Facebook" },
+]
 
+export default function Footer() {
+    return (
+        <footer id="footer" className="w-full bg-dark-300 border-t border-line-100 pt-[40px] pb-[110px] px-3 md:pb-[40px]">
+            <Container>
+                <div className="w-full flex flex-row items-center justify-between gap-5 flex-wrap">
+                    <div className="flex flex-col gap-[5px]">
+                        <p className="mono text-[13px] text-white-100 font-bold">Maniraj Yadav</p>
+                        <p className="mono text-[11px] text-white-300">
+                            &copy; {new Date().getFullYear()} — built with Next.js
+                        </p>
+                    </div>
 
-function Footer() {
-
-  return (
-    <div id="footer" className="relative w-screen h-[35vh] py-5 px-3 bg-dark-300 ">
-      <Container>
-        <div className="relative flex flex-row items-center justify-between">
-          <div className="left flex flex-row">
-            <h1 className=" text-[15px] ">
-              <span className="font-extrabold">Maniraj</span>
-            </h1>
-            <small className="ml-[20px] text-white-200 ">
-              &copy; {new Date().getFullYear()} All Right Reserved.
-            </small>
-          </div>
-          <div className="right">
-            <div className="socials flex flex-row items-center justify-center">
-              {socials["linkedin"] !== "" && <SocialLink url={socials["linkedin"]} children={<FaLinkedin />} />}
-
-              {socials["github"] !== "" && <SocialLink url={socials["github"]} children={<FaGithub />} />}
-
-              {socials["email"] !== "" && <SocialLink url={socials["email"]} children={<AiFillMail />} />}
-
-              {socials["facebook"] !== "" && <SocialLink url={socials["facebook"]} children={<FaFacebook />} />}
-            </div>
-          </div>
-        </div>
-      </Container>
-      <Refer />
-    </div>
-  )
-}
-
-export default Footer
-
-function SocialLink({ url, children }) {
-
-  return (
-    <a href={url} target="_blank" className=" no-underline text-white-100 decoration-none hover:text-white-100 mr-4 ">
-      {children}
-    </a>
-  )
-}
-
-function Refer() {
-  return (
-    <div className="w-screen flex flex-row items-center justify-center absolute bottom-[100px] mx-auto md:bottom-[10px]">
-      <span className="py-2 text-[12px] text-white-200 ">
-        Powered with 💖 by <a target="_blank" href="https://www.linkedin.com/in/maniraj-yadav/" className="text-green-200 underline hover:text-green-200">Maniraj</a>
-      </span>
-    </div>
-  )
+                    <div className="flex flex-row items-center gap-[9px]">
+                        {LINKS.map(({ key, icon, label }) =>
+                            socials[key] ? (
+                                <a
+                                    key={key}
+                                    href={key === "email" ? `mailto:${socials[key]}` : socials[key]}
+                                    target={key === "email" ? undefined : "_blank"}
+                                    rel="noreferrer"
+                                    aria-label={label}
+                                    title={label}
+                                    className="w-[36px] h-[36px] flex items-center justify-center rounded-[7px] border border-line-100 text-white-200 transition-all hover:text-green-200 hover:border-green-500 hover:bg-green-600"
+                                >
+                                    {icon}
+                                </a>
+                            ) : null
+                        )}
+                    </div>
+                </div>
+            </Container>
+        </footer>
+    )
 }
