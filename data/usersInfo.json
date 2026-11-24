@@ -1,16 +1,16 @@
 {
   "full_name": "Maniraj Yadav",
-  "role": "Backend Engineer",
-  "user_skill": "SDE-1 @ SwishX",
-  "focus_line": "Go · Java · Concurrency · Multithreading",
-  "hero_desc": "I build Go and Java services for a pharma distribution platform. Most of my work is on the latency path: running calls concurrently, batching queries, and cancelling cleanly.",
-  "intro_tagline": "The performance side is what I enjoy most — goroutine fan-out, context cancellation, and knowing when a problem genuinely needs concurrency versus a better data model.",
-  "subTitle": "Backend engineer, mostly Go and Java.",
+  "role": "Research Analyst",
+  "user_skill": "Research Analyst @ BKI",
+  "focus_line": "Equity Research · Financial Modeling · Market Analysis",
+  "hero_desc": "I research markets and companies for an investment firm. Most of my work is turning raw financial data into clear analysis: building models, tracking market trends, and writing reports that support investment decisions.",
+  "intro_tagline": "The part I enjoy most is where research meets code — pulling data together, building models, and turning numbers into a clear view of what is actually going on.",
+  "subTitle": "Research analyst with a software engineering background.",
   "github_username": "manirajyadav-1",
   "greeting_type": "Hey ✌",
   "bio_desc": [
-    "I'm a final-year Computer Science student at SRM University AP, currently an SDE-1 at SwishX in Bengaluru, where I build backend services for a pharma distribution platform. Much of my work is making requests that touch several services return fast — running independent calls concurrently so a response costs the slowest one instead of the sum of all of them, batching what would otherwise be hundreds of round trips, and making sure that when a request is cancelled, the work still in flight gets torn down with it.",
-    "I built a 6-level sales hierarchy engine on recursive PostgreSQL CTEs, automated an MOQ-based cashback flow that replaced a manual points-grant process across 90 schemes and 568 rules, and shipped a CMS backend in Go delivering 20+ REST APIs with Redis caching and S3 storage.",
+    "I'm a final-year Computer Science student at SRM University AP, currently a Research Analyst at Black Komodo Investments (BKI), working remotely. I research markets and companies, build financial models, and turn raw data into analysis that supports investment decisions.",
+    "Before that I worked as a software engineer, including a full-stack internship at BKI building features with React.js and Spring Boot. That background shapes how I do research: I automate data gathering where I can and lean on reproducible analysis over one-off spreadsheets.",
     "On the side: a RAG-based Git analyzer that answers questions about a repo's commit history, an AI resume builder, and a roommate-finding app. Oracle Certified Professional for Java SE 17, and an open-source contributor. Away from the screen I volunteer with NSS — blood donation camps and beach clean-ups, mostly."
   ],
   "focus": [
