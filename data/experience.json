@@ -1,32 +1,17 @@
 {
   "experience": [
     {
-      "role": "SDE-1",
-      "company": "SwishX",
-      "location": "Bengaluru, India",
-      "type": "Internship",
-      "start": "Feb 2026",
+      "role": "Research Analyst",
+      "company": "Black Komodo Investments",
+      "location": "Remote",
+      "type": "Full-time",
+      "start": "Nov 2026",
       "end": "Present",
-      "startDate": "2026-02",
+      "startDate": "2026-11",
       "current": true,
-      "summary": "Backend engineering on a pharma distribution platform. Joined as a Software Developer Intern and was promoted to SDE-1 in Aug 2026.",
-      "highlights": [
-        "Built a 6-level sales hierarchy engine using recursive PostgreSQL CTEs, enabling single-query subtree retrieval across 401 employees, 19,028+ retailers and 4,038+ stockists spanning 24 states and 10 divisions.",
-        "Automated MOQ-based cashback for retailers by integrating scheme evaluation into the wallet credit flow, replacing a manual points-grant process; supports 90 active schemes and 568 MOQ rules.",
-        "Deployed a production-ready CMS backend in Go using the Factory Pattern, delivering 20+ REST APIs across 3 product verticals with Redis caching and AWS S3 storage.",
-        "Researched and evaluated 5 fuzzy string matching algorithms for automated name reconciliation during KYC verification, significantly improving approval rates for 7,000+ users."
-      ],
-      "stack": [
-        "Go",
-        "Gin",
-        "PostgreSQL",
-        "Redis",
-        "REST APIs",
-        "Microservices",
-        "Docker",
-        "AWS",
-        "CI/CD"
-      ]
+      "summary": "Researching markets and companies, building financial models, and writing analysis that supports investment decisions.",
+      "highlights": [],
+      "stack": []
     },
     {
       "role": "Full Stack Developer Intern",
